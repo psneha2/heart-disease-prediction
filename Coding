@@ -1,0 +1,110 @@
+RANDOM FOREST 
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import confusion_matrix
+from google.colab import files 
+uploaded=files.upload()
+heart_data = pd.read_csv('hearts.csv')
+X = heart_data.drop('target', axis=1)
+y = heart_data['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+rf_clf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_clf.fit(X_train, y_train)
+y_pred = rf_clf.predict(X_test)
+print('RANDOM FOREST')
+accuracy_rf = accuracy_score(y_test, y_pred)
+print('Accuracy:', accuracy_rf)
+
+precision_rf = precision_score(y_test, y_pred, average='weighted')
+print('Precision:', precision_rf)
+
+#Calculate sensitivity (recall) of Random Forest classifier
+rf_sensitivity = recall_score(y_test, y_pred, average='weighted')
+print('Sensitivity:', rf_sensitivity)
+
+SVM ALGORITHIM
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+from google.colab import files 
+uploaded=files.upload()
+# Load the dataset
+heart_data = pd.read_csv('hearts.csv')
+# Split the dataset into features and target variable
+X = heart_data.drop('target', axis=1)
+y = heart_data['target']
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Create an SVM classifier with linear kernel
+svm_clf = SVC(kernel='linear')
+
+# Train the classifier on the training data
+svm_clf.fit(X_train, y_train)
+
+# Make predictions on the testing data
+y_pred = svm_clf.predict(X_test)
+
+print('SVM Alogrithm')
+# Calculate the accuracy of the model
+accuracy_svm = accuracy_score(y_test, y_pred)
+print('Accuracy:', accuracy_svm)
+
+precision_svm = precision_score(y_test, y_pred, average='weighted')
+print('Precision:', precision_svm)
+
+# Calculate sensitivity (recall) of SVM classifier
+svm_sensitivity = recall_score(y_test, y_pred, average='weighted')
+print('Sensitivity:', svm_sensitivity)
+
+KNN ALGORITHIM
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+from google.colab import files 
+uploaded=files.upload()
+# Load data from a CSV file
+data = pd.read_csv("hearts.csv")
+# Separate features (X) and target (y) columns
+X = data.drop("target", axis=1)
+y = data["target"]
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create KNN classifier
+knn = KNeighborsClassifier(n_neighbors=3)
+
+# Fit the classifier to the training data
+knn.fit(X_train, y_train)
+
+# Predict the target values for the test data
+y_pred = knn.predict(X_test)
+
+print('KNN')
+# Calculate the accuracy of the classifier
+accuracy_knn = accuracy_score(y_test, y_pred)
+print("Accuracy: ",accuracy_knn)
+
+precision_knn = precision_score(y_test, y_pred, average='weighted')
+print('Precision:', precision_knn)
+
+
+# Calculate sensitivity (recall) of KNN classifier
+knn_sensitivity = recall_score(y_test, y_pred, average='weighted')
+print('Sensitivity:', knn_sensitivity)
